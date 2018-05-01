@@ -1,20 +1,23 @@
+// @flow
 import React from 'react';
-import Auth from 'libs/Auth';
+import Auth from '../libs/Auth';
 import Button from 'material-ui/Button';
 
-export default class Login extends React.Component {
+type Props = {
+  userHasAuthenticated : Function
+}
 
-  constructor(props) {
-    super(props);
+type State = {
+  isLoading: boolean
+}
 
-    this.state = {
-      isLoading: false
-    };
+export default class Login extends React.Component<Props, State> {
 
+  state = {
+    isLoading: false
   }
 
-  login = event => {
-    //event.preventDefault();
+  login = (event: SyntheticEvent<HTMLButtonElement>) => {
 
     this.setState({ isLoading: true });
 
@@ -28,11 +31,8 @@ export default class Login extends React.Component {
   }
 
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
-
     return (
       <div>
-        <p>You must log in to view the page at {from.pathname}</p>
         <Button variant="raised" color="primary" onClick={this.login}>
           Log in
         </Button>
